@@ -1,0 +1,46 @@
+# Recreate with:
+#   conda env create -f environment.yml
+#   conda activate erx
+#   python -m ipykernel install --user --name erx --display-name "erx"
+#
+# GPU note: torch is installed from the CUDA 12.1 wheel index. CuPy needs a CUDA runtime
+# to load, and this project deliberately does NOT install a second copy of the CUDA
+# toolkit - src/sitecustomize.py points CuPy at the runtime already bundled inside the
+# PyTorch wheel. See that file for why PATH alone does not work on Windows.
+#
+# CPU-only machines: everything still runs. The notebooks detect the missing GPU and fall
+# back automatically; only notebook 01's transformer training is meaningfully slower.
+name: erx
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      # --- deep learning -------------------------------------------------------
+      - --extra-index-url https://download.pytorch.org/whl/cu121
+      - torch==2.5.1+cu121
+      - cupy-cuda12x==12.3.0
+      - transformers==4.53.2
+
+      # --- spaCy ---------------------------------------------------------------
+      - spacy==3.8.16
+      - spacy-transformers==1.4.0
+      - spacy-alignments==0.9.2
+      - thinc==8.3.13
+      - https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+
+      # --- data / plotting -----------------------------------------------------
+      - numpy==1.26.4
+      - pandas==3.0.5
+      - scikit-learn==1.9.0
+      - matplotlib==3.11.1
+      - networkx==3.6.1
+      - tabulate==0.10.0
+
+      # --- notebooks -----------------------------------------------------------
+      - jupyter==1.1.1
+      - ipykernel==7.3.0
+      - nbconvert==7.17.1

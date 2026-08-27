@@ -1,0 +1,26 @@
+# trained models / spaCy training output
+models/
+output/
+
+# upstream corpus: laxmimerit/CV-Parsing-using-Spacy-3 has NO LICENSE file, so it is
+# all-rights-reserved. The notebook downloads it at runtime; we never redistribute it.
+data/raw/
+# ...and the DocBins built from it embed the full resume texts, so they are equally
+# off-limits. Notebook 01 regenerates them from data/raw in seconds.
+data/processed/resume_*.spacy
+# (data/processed/relations_*.spacy and rel_*.spacy ARE committed - that corpus is MIT.)
+
+# legacy repos, kept locally until archived on GitHub (Phase 4)
+NER/
+Relationships_extraction/
+
+# python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# scratch / working notes
+error.txt
+plan.md
+todo.md
+findings_phase1.md
